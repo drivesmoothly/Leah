@@ -1,0 +1,32 @@
+NAME LCN1
+
+#include <eikon.rh>
+#include <appinfo.rh>
+#include "LeahConsts.hrh"
+#include "LeahConfig.loc"
+
+RESOURCE RSS_SIGNATURE
+    {
+
+    }
+
+RESOURCE TBUF
+    {
+    buf = "LeahConfig";
+    }
+
+RESOURCE EIK_APP_INFO
+    {
+    
+    }
+
+RESOURCE LOCALISABLE_APP_INFO r_leah_config_localisable_app_info
+    {
+    short_caption = qtn_config_app_caption;
+    caption_and_icon =
+    CAPTION_AND_ICON_INFO
+        {
+        caption = qtn_config_app_caption;
+        number_of_icons = 1;
+        };
+    }

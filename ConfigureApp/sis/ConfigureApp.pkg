@@ -1,0 +1,39 @@
+;
+; ===============================================================================
+; Name        : LeahConfig.pkg
+; Author      : Marius Crisan
+; Copyright   : 2011 Symbera Solutions
+; Description : Package file for installer.
+; ===============================================================================
+;
+;Language - standard language definitions
+&EN
+
+; standard SIS file header
+#{"LeahConfig"},(0x20220005),1,0,0, TYPE=SA
+
+;Localised Vendor name
+%{"modematech"}
+
+;Unique Vendor name
+:"modematech"
+
+;Supports S60 3.1
+[0x102032BE], 0, 0, 0, {"S60ProductID"}
+;Supports S60 3.2
+[0x102752AE], 0, 0, 0, {"S60ProductID"}
+;Supports S60 5.0
+[0x1028315F], 0, 0, 0, {"S60ProductID"}
+;Supports Symbian^3
+[0x20022E6D], 0, 0, 0, {"S60ProductID"}
+
+; External resources
+"..\..\Resources\Images\google.png"                                                - "c:\google.png"
+
+; Configure
+"$(EPOCROOT)epoc32\data\z\resource\apps\LeahConfig.rsc"                         - "!:\resource\apps\LeahConfig.rsc"
+"$(EPOCROOT)epoc32\data\z\private\10003a3f\import\apps\LeahConfig_reg.rsc"      - "!:\private\10003a3f\import\apps\LeahConfig_reg.rsc"
+"$(EPOCROOT)epoc32\release\$(PLATFORM)\$(TARGET)\LeahConfig.exe"                - "!:\sys\bin\LeahConfig.exe"
+
+; Embedded sis for EUserHL
+@"EUserHL.sis", (0x2001B440)

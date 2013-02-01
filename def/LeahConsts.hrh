@@ -1,0 +1,36 @@
+// PRODUCT WIDE CONSTANTS
+//
+// Usually UIDs and others
+
+// COMMON FRAMEWORK
+#define K_LEAH_COMMON_FRAMEWORK_FILENAME        LeahCommon.lib
+#define K_LEAH_COMMON_FRAMEWORK_LIB_FILENAME    LeahCommon.lib
+#define K_LEAH_COMMON_FRAMEWORK_UID             0x20220001
+#define K_LEAH_COMMON_FRAMEWORK_CAPABILITIES    LocalServices NetworkServices PowerMgmt ProtServ ReadDeviceData ReadUserData SwEvent TrustedUI UserEnvironment WriteDeviceData WriteUserData
+
+// SERVICE
+#define K_LEAH_SERVICE_FILENAME                 LeahService.exe
+#define K_LEAH_SERVICE_UID                      0x20220002
+#define K_LEAH_SERVICE_UID_VALUE				20220002
+#define K_LEAH_SERVICE_CAPABILITIES             LocalServices NetworkServices PowerMgmt ProtServ ReadDeviceData ReadUserData SwEvent TrustedUI UserEnvironment WriteDeviceData WriteUserData
+#define K_LEAH_SERVICE_QUOTED_FULL_FILENAME		"!:\\sys\\bin\\LeahService.exe"
+#define K_LEAH_SERVICE_VERSION_MAJOR			1
+#define K_LEAH_SERVICE_VERSION_MINOR			0
+#define K_LEAH_SERVICE_VERSION_BUILD			1
+
+// SERVICE LIBRARY
+#define K_LEAH_SERVLIB_FILENAME                 LeahServlib.dll
+#define K_LEAH_SERVLIB_UID                      0x20220003
+#define K_LEAH_SERVLIB_CAPABILITIES             LocalServices NetworkServices PowerMgmt ProtServ ReadDeviceData ReadUserData SwEvent TrustedUI UserEnvironment WriteDeviceData WriteUserData
+
+// SYNC FRAMEWORK
+#define K_LEAH_SYNC_FILENAME                    LeahSync.dll
+#define K_LEAH_SYNC_UID                         0x20220004
+#define K_LEAH_SYNC_CAPABILITIES                LocalServices NetworkServices PowerMgmt ProtServ ReadDeviceData ReadUserData SwEvent TrustedUI UserEnvironment WriteDeviceData WriteUserData
+
+// CONFIGURE APPLICATION
+#define K_LEAH_CONFIG_FILENAME                  LeahConfig.exe
+#define K_LEAH_CONFIG_UID                       0x20220005
+#define K_LEAH_CONFIG_CAPABILITIES              LocalServices NetworkServices PowerMgmt ProtServ ReadDeviceData ReadUserData SwEvent TrustedUI UserEnvironment WriteDeviceData WriteUserData
+#define K_LEAH_CONFIG_APPFILE                   "LeahConfig"
+#define K_LEAH_CONFIG_MENUNAME                  "Leah"

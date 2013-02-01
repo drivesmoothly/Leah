@@ -1,0 +1,6 @@
+#include "../Common/group/bld.inf"
+#include "../ServLib/group/bld.inf"
+#include "../Service/group/bld.inf"
+#include "../ConfigureApp/group/bld.inf"
+//#include "../NotifierApp/group/bld.inf"
+//#include "../Sync/group/bld.inf"

@@ -1,0 +1,21 @@
+    UsernameBox = new (ELeave) EditBox();
+    UsernameBox->Font = App->Fonts->NormalFont();
+    UsernameBox->EmptyText = _L("username");
+    UsernameBox->Bounds = TRect(TPoint(15, 400), TSize(200, 50));
+    UsernameBox->DoubleBuffered = ETrue;
+    AddControl(UsernameBox);
+    
+    PassBox = new (ELeave) EditBox();
+    PassBox->Font = App->Fonts->NormalFont();
+    PassBox->EmptyText = _L("password");
+    PassBox->Bounds = TRect(TPoint(15, 460), TSize(200, 50));
+    PassBox->DoubleBuffered = ETrue;
+    AddControl(PassBox);
+
+    GoogleImage = new (ELeave) Image();
+    GoogleImage->Align = Alignment::EHMidVMid;
+    GoogleImage->Bounds = TRect(TPoint(242, 410), TSize(90, 90));
+    GoogleImage->Path = _L("c:\\google.png");
+    AddControl(GoogleImage);
+
+    FocusChild(UsernameBox);

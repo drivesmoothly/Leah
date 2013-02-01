@@ -1,0 +1,71 @@
+#include "../../def/LeahConsts.hrh"
+
+TARGET          K_LEAH_CONFIG_FILENAME
+TARGETTYPE      EXE
+UID             0 K_LEAH_CONFIG_UID
+SECUREID        K_LEAH_CONFIG_UID
+EPOCSTACKSIZE   0x10000
+EPOCHEAPSIZE    0x10000 0x200000
+
+LANG            SC 01 78
+
+SOURCEPATH      ../src
+SOURCE          LeahConfEntry.cpp
+SOURCE          LeahConfApplication.cpp
+SOURCE          LeahConfIntroForm.cpp
+SOURCE          LeahConfMainForm.cpp
+
+SOURCEPATH      ../xml
+SOURCE          LeahConfIntroForm.xml.cpp
+SOURCE          LeahConfMainForm.xml.cpp
+
+SOURCEPATH      ../data
+START RESOURCE  LeahConfig.rss
+HEADER
+TARGETPATH      /resource/apps
+END
+
+START RESOURCE  LeahConfig_reg.rss
+HEADER
+#ifdef WINSCW
+TARGETPATH      /private/10003a3f/apps
+#else
+TARGETPATH      /private/10003a3f/import/apps
+#endif
+END
+
+USERINCLUDE     ../inc
+USERINCLUDE     ../xml
+USERINCLUDE     ../../def
+USERINCLUDE     ../../Common/inc
+USERINCLUDE     ../../Common/inc/controls
+USERINCLUDE     ../../Common/inc/events
+USERINCLUDE     ../../Common/inc/layout
+USERINCLUDE     ../../Common/inc/properties
+USERINCLUDE     ../../Common/inc/symbianforms
+USERINCLUDE     ../../Common/inc/utils
+USERINCLUDE     ../../Common/xml
+
+USERINCLUDE     ../xml
+
+SYSTEMINCLUDE   APP_LAYER_SYSTEMINCLUDE
+SYSTEMINCLUDE   MW_LAYER_SYSTEMINCLUDE
+SYSTEMINCLUDE   /epoc32/include
+
+STATICLIBRARY   K_LEAH_COMMON_FRAMEWORK_LIB_FILENAME
+
+LIBRARY         apparc.lib
+LIBRARY         euser.lib
+LIBRARY         eikcore.lib
+LIBRARY         euserhl.lib
+LIBRARY         gdi.lib
+LIBRARY         efsrv.lib
+LIBRARY         ws32.lib
+LIBRARY         imageconversion.lib
+LIBRARY         bitgdi.lib
+LIBRARY         fbscli.lib
+LIBRARY         ecom.lib
+LIBRARY         apgrfx.lib
+DEBUGLIBRARY    flogger.lib
+
+CAPABILITY      K_LEAH_CONFIG_CAPABILITIES

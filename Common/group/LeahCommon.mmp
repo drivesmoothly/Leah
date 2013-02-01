@@ -1,0 +1,107 @@
+#include        "../../def/LeahConsts.hrh"
+
+TARGET          K_LEAH_COMMON_FRAMEWORK_FILENAME
+TARGETTYPE      lib
+UID             0 K_LEAH_COMMON_FRAMEWORK_UID
+SECUREID        K_LEAH_COMMON_FRAMEWORK_UID
+
+LANG            SC
+
+EXPORTUNFROZEN
+
+SOURCEPATH      ../src
+SOURCE			AppLauncher.cpp
+SOURCE          LeahSettings.cpp
+SOURCE          namedresource.cpp
+SOURCE          streamutils.cpp
+SOURCE          stringutils.cpp
+
+SOURCEPATH      ../src/events
+SOURCE          events.cpp
+SOURCE          handlermethodbase.cpp
+SOURCE          handlermethodcompare.cpp
+
+SOURCEPATH      ../src/properties
+SOURCE          attachedpropertystore.cpp
+SOURCE          propertyholder.cpp
+SOURCE          propertybase.cpp
+SOURCE          propertyadapters.cpp
+SOURCE          propertyreader.cpp
+SOURCE          defaultpropertystore.cpp
+
+SOURCEPATH      ../src/controls
+SOURCE          keyeventargs.cpp
+SOURCE          keypresseventargs.cpp
+SOURCE          mouseeventargs.cpp
+SOURCE          painteventargs.cpp
+SOURCE          drageventargs.cpp
+SOURCE          form.cpp
+SOURCE          backbuffer.cpp
+SOURCE          textbox.cpp
+SOURCE          button.cpp
+SOURCE          align.cpp
+SOURCE          editbox.cpp
+SOURCE          image.cpp
+SOURCE          caret.cpp
+SOURCE          checkbox.cpp
+SOURCE          control.cpp
+SOURCE          label.cpp
+SOURCE          keyboard.cpp
+
+SOURCEPATH      ../src/layout
+SOURCE          panel.cpp
+SOURCE          canvas.cpp
+SOURCE          grid.cpp
+SOURCE          gridsizedefinition.cpp
+SOURCE          stackpanel.cpp
+
+SOURCEPATH      ../src/symbianforms
+SOURCE          application.cpp
+SOURCE          wsclient.cpp
+SOURCE          wsredrawer.cpp
+SOURCE          fontsmanager.cpp
+SOURCE          keyboardform.cpp
+
+SOURCEPATH      ../src/utils
+SOURCE          imageloader.cpp
+SOURCE          imagestore.cpp
+SOURCE          descutils.cpp
+SOURCE          lexutils.cpp
+SOURCE          hashutils.cpp
+SOURCE          numericutils.cpp
+
+SOURCEPATH       ../xml
+SOURCE          Keyboard.xml.cpp
+SOURCE          KeyboardForm.xml.cpp
+
+USERINCLUDE     ../inc
+USERINCLUDE     ../inc/events
+USERINCLUDE     ../inc/properties
+USERINCLUDE     ../inc/controls
+USERINCLUDE     ../inc/layout
+USERINCLUDE     ../inc/symbianforms
+USERINCLUDE     ../inc/utils
+USERINCLUDE     ../inc/debug
+USERINCLUDE     ../xml
+USERINCLUDE     ../../def
+
+SYSTEMINCLUDE   APP_LAYER_SYSTEMINCLUDE
+SYSTEMINCLUDE   MW_LAYER_SYSTEMINCLUDE
+SYSTEMINCLUDE   /epoc32/include
+
+LIBRARY         euser.lib
+LIBRARY         euserhl.lib
+LIBRARY         estor.lib
+LIBRARY         cone.lib
+LIBRARY         gdi.lib
+LIBRARY         ws32.lib
+LIBRARY         bitgdi.lib
+LIBRARY         efsrv.lib
+LIBRARY         fbscli.lib
+LIBRARY         eikcore.lib
+LIBRARY         imageconversion.lib
+LIBRARY         ecom.lib
+LIBRARY         hash.lib
+DEBUGLIBRARY    flogger.lib
+
+CAPABILITY      K_LEAH_COMMON_FRAMEWORK_CAPABILITIES

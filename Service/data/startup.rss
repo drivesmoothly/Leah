@@ -1,0 +1,8 @@
+#include <startupitem.rh>
+#include "LeahConsts.hrh"
+
+RESOURCE STARTUP_ITEM_INFO r_mole_service_startup
+    {
+    executable_name = K_LEAH_SERVICE_QUOTED_FULL_FILENAME;
+    recovery = EStartupItemExPolicyNone;
+    }

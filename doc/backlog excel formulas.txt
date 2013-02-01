@@ -1,0 +1,26 @@
+; Number of tasks
+=COUNTIF( INDIRECT("'" & Table8[[#This Row],[Sprint]] & "'!$A$6:$A$10000"), Table8[[#This Row],[ID]] )
+
+; New
+=COUNTIFS( INDIRECT("'" & Table8[[#This Row],[Sprint]] & "'!$D$6:$D$10000"), "*", INDIRECT("'" & Table8[[#This Row],[Sprint]] & "'!$A$6:$A$10000"), Table8[[#This Row],[ID]] )
+
+; In Progress
+=COUNTIFS( INDIRECT("'" & Table8[[#This Row],[Sprint]] & "'!$E$6:$E$10000"), "*", INDIRECT("'" & Table8[[#This Row],[Sprint]] & "'!$A$6:$A$10000"), Table8[[#This Row],[ID]] )
+
+; To be verified
+=COUNTIFS( INDIRECT("'" & Table8[[#This Row],[Sprint]] & "'!$F$6:$F$10000"), "*", INDIRECT("'" & Table8[[#This Row],[Sprint]] & "'!$A$6:$A$10000"), Table8[[#This Row],[ID]] )
+
+; Done
+=COUNTIFS( INDIRECT("'" & Table8[[#This Row],[Sprint]] & "'!$G$6:$G$10000"), "*", INDIRECT("'" & Table8[[#This Row],[Sprint]] & "'!$A$6:$A$10000"), Table8[[#This Row],[ID]] )
+
+; Impeded
+=COUNTIFS( INDIRECT("'" & Table8[[#This Row],[Sprint]] & "'!$H$6:$H$10000"), "*", INDIRECT("'" & Table8[[#This Row],[Sprint]] & "'!$A$6:$A$10000"), Table8[[#This Row],[ID]] )
+
+; Worked Hours
+=SUMIFS( INDIRECT("'" & Table8[[#This Row],[Sprint]] & "'!$K$6:$K$10000"), INDIRECT("'" & Table8[[#This Row],[Sprint]] & "'!$A$6:$A$10000"), Table8[[#This Row],[ID]] )
+
+; Calculate status
+= IF( Impeded > 0, 'Product Backlog'!$A$12, IF( Done = NumberOfTasks, 'Product Backlog'!$A$11, IF( New = NumberOfTasks, 'Product Backlog'!$A$9, 'Product Backlog'!$A$10 )))
+
+; Display status
+= IFERROR( CalculateStatus, "N/A" )

@@ -1,0 +1,18 @@
+#include <appinfo.rh>
+#include <LeahConfig.rsg>
+
+#include "LeahConsts.hrh"
+#include "LeahConfig.loc"
+
+UID2 KUidAppRegistrationResourceFile
+UID3 K_LEAH_CONFIG_UID
+
+RESOURCE APP_REGISTRATION_INFO
+    {
+    app_file = K_LEAH_CONFIG_APPFILE;
+    localisable_resource_file = "\\resource\\apps\\LeahConfig";
+    localisable_resource_id = R_LEAH_CONFIG_LOCALISABLE_APP_INFO;
+
+    embeddability = KAppNotEmbeddable;
+    newfile = KAppDoesNotSupportNewFile;
+    }

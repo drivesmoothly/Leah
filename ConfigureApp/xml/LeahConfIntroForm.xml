@@ -1,0 +1,72 @@
+<LeahConfIntroForm Name="IntroForm">
+    <Grid Name="rootLayout" RowDefinitions="auto *">
+        <StackPanel Name="titlePanel">
+            <Label Name="HeaderLabel" 
+                   Color="grey" 
+                   TextAlignment="left" 
+                   Margin="15 10 0 0"
+                   Text="welcome to"/>
+            <Label Name="TitleLabel" 
+                   Font="title" 
+                   Color="white" 
+                   TextAlignment="left" 
+                   Margin="15 10 0 0"
+                   Text="AllContacts - Sprint 5"/>
+        </StackPanel>
+        <Grid Name="contentPanel" Grid.Row="1" RowDefinitions="* Auto Auto Auto Auto">
+            <TextBox Name="WelcomeText" 
+                     Grid.Row="0"
+                     VerticalAlignment="mid"
+                     Color="white" 
+                     Align="lefttop" 
+                     Margin="15 10 15 10" 
+                     Text="The days when you had to worry about not losing your contacts are over.\nSync your contacts with Google and keep them automatically synced."/>
+            <Grid Name="grid1" ColumnDefinitions="Auto * 2* 75" RowDefinitions="Auto" Grid.Row="1">
+                <Label Name="label5" 
+                       Color="white" 
+                       Text="auto" 
+                       BackgroundColor="darkgrey"/>
+                <Label Name="label6" 
+                       Color="orange" 
+                       Text="w1" 
+                       Grid.Column="1" 
+                       BackgroundColor="darkred" 
+                       HorizontalAlignment="mid"/>
+                <Label Name="label7" 
+                       Color="orange" 
+                       Text="w2 stretch" 
+                       Grid.Column="2" 
+                       BackgroundColor="darkgreen" 
+                       HorizontalAlignment="stretch"/>
+                <Label Name="label8" 
+                       Color="orange" 
+                       Text="fixed" 
+                       Grid.Column="3" 
+                       BackgroundColor="darkblue"/>
+            </Grid>
+            <CheckBox Name="NeverShowCheckBox" 
+                      Grid.Row="2"
+                      Color="white" 
+                      Margin="15 10 0 10" 
+                      Text="Never show this again" />
+            <StackPanel Name="panel2" Orientation="horizontal" Grid.Row="3">
+                <Label Name="label2" 
+                       Color="white" 
+                       Text="Inner "/>
+                <Label Name="label3" 
+                       Color="white" 
+                       Text="layouts "/>
+                <Label Name="label4" 
+                       Color="white" 
+                       Text="are working."/>
+            </StackPanel>
+            <Grid Name="softkeysGrid" ColumnDefinitions="* * *" RowDefinitions="auto" Grid.Row="4">
+                <Button Name="ButtonNext" 
+                        Grid.Column="2"
+                        Margin="10 10 10 10" 
+                        HorizontalAlignment="stretch" 
+                        Text="Next"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</LeahConfIntroForm>

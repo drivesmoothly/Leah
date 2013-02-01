@@ -1,0 +1,10 @@
+CHARACTER_SET UTF8
+
+// LOCALISATION STRINGS
+
+//d:
+#define qtn_about_title "About"
+
+//d:
+#define qtn_config_app_caption "Leah"
+

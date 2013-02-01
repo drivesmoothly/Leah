@@ -1,0 +1,14 @@
+#ifndef LEAHCONFIG_LOC_
+#define LEAHCONFIG_LOC_
+
+#ifdef LANGUAGE_SC
+#include "LeahConfig.l01"
+
+#elif defined LANGUAGE_01
+#include "LeahConfig.l01"
+
+#elif defined LANGUAGE_78
+#include "LeahConfig.l78"
+
+#endif
+#endif

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Keyboard BackgroundColor="darkgrey">
+    <Grid Name="rootLayout"
+          RowDefinitions="Auto">
+        <Grid Name="lettersPage"
+              Grid.Row="0"
+              RowDefinitions="Auto Auto Auto Auto"
+              Margin="1 1 1 1"
+              DoubleBuffered="true">
+            <Grid Name="abcRow1" 
+                  RowDefinitions="Auto"
+                  ColumnDefinitions="* * * * * * * * * *">
+            </Grid>
+            <Grid Name="abcRow2"
+                  Grid.Row="1"
+                  RowDefinitions="Auto"
+                  ColumnDefinitions="0.5* * * * * * * * * * 0.5*">
+            </Grid>
+            <Grid Name="abcRow3"
+                  Grid.Row="2"
+                  RowDefinitions="Auto"
+                  ColumnDefinitions="1.5* * * * * * * * 1.5*">
+            </Grid>
+            <Grid Name="abcRow4"
+                  Grid.Row="3"
+                  RowDefinitions="Auto"
+                  ColumnDefinitions="1.5* * 4* * 2.5*">
+            </Grid>
+        </Grid>
+        <Grid Name="numbersPage"
+              RowDefinitions="Auto Auto Auto Auto"
+              Margin="1 1 1 1"
+              Visible="false"
+              DoubleBuffered="true">
+            <Grid Name="numericRow1"
+                  RowDefinitions="Auto"
+                  ColumnDefinitions="* * * * * * * * * *">
+            </Grid>
+            <Grid Name="numericRow2"
+                  Grid.Row="1"
+                  RowDefinitions="Auto"
+                  ColumnDefinitions="* * * * * * * * * *"> 
+            </Grid>
+            <Grid Name="numericRow3"
+                  Grid.Row="2"
+                  RowDefinitions="Auto"
+                  ColumnDefinitions="1.5* 7* 1.5*">
+                <Grid Name="numericRow3Keys"
+                      Grid.Column="1"
+                      RowDefinitions="Auto"
+                      ColumnDefinitions="* * * * *">
+                </Grid>
+            </Grid>
+            <Grid Name="numericRow4"
+                  Grid.Row="3"
+                  RowDefinitions="Auto"
+                  ColumnDefinitions="1.5* * 4* * 2.5*">
+            </Grid>
+        </Grid>
+        <Grid Name="symbolsPage"
+              RowDefinitions="Auto Auto Auto Auto"
+              Margin="1 1 1 1"
+              Visible="false"
+              DoubleBuffered="true">
+            <Grid Name="symbolsRow1"
+                  RowDefinitions="Auto"
+                  ColumnDefinitions="* * * * * * * * * *">
+            </Grid>
+            <Grid Name="symbolsRow2"
+                  Grid.Row="1"
+                  RowDefinitions="Auto"
+                  ColumnDefinitions="0.5* * * * * * * * 0.5*"> 
+            </Grid>
+            <Grid Name="symbolsRow3"
+                  Grid.Row="2"
+                  RowDefinitions="Auto"
+                  ColumnDefinitions="1.5* 7* 1.5*">
+                <Grid Name="symbolsRow3Keys"
+                      Grid.Column="1"
+                      RowDefinitions="Auto"
+                      ColumnDefinitions="* * * * *">
+                </Grid>
+            </Grid>
+            <Grid Name="symbolsRow4"
+                  Grid.Row="3"
+                  RowDefinitions="Auto"
+                  ColumnDefinitions="1.5* * 4* * 2.5*">
+            </Grid>
+        </Grid>
+        <Button Name="popupKey" 
+            Grid.Row="0"
+            Text="B" 
+            Margin="1 1 1 1" 
+            HorizontalAlignment="center" 
+            VerticalAlignment="center"
+            Align="midmid"
+            Visible="false"
+            MinimumSize="72 40"
+            BackgroundColor="grey"
+            Color="black"/>
+    </Grid>
+</Keyboard>

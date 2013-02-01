@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<KeyboardForm Name="keyboardForm">
+    <Grid Name="keyboardLayout" RowDefinitions="auto" ColumnDefinitions="*">
+        <Keyboard Name="keyboard" Grid.Row="0" Grid.Column="0"/>
+    </Grid>
+</KeyboardForm>

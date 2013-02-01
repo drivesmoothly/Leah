@@ -1,0 +1,40 @@
+<LeahConfMainForm Name="MainForm">
+    <Grid Name="rootLayout" RowDefinitions="auto *">
+        <StackPanel Name="titlePanel">
+            <Label Name="HeaderLabel" 
+                   Color="grey" 
+                   TextAlignment="left" 
+                   Margin="15 10 0 0"
+                   Text="setup"/>
+            <Label Name="TitleLabel" 
+                   Font="title" 
+                   Color="white" 
+                   TextAlignment="left" 
+                   Margin="15 10 0 0"
+                   Text="AllContacts"/>
+        </StackPanel>
+        <Grid Name="contentPanel" Grid.Row="1" RowDefinitions="* Auto Auto">
+            <TextBox Name="Setup" 
+                     Color="white" 
+                     Grid.Row="0"
+                     Align="lefttop"
+                     Margin="15 10 15 10" 
+                     Text="Setup steps:\n\n1. Login to Google\n2. Sync content options\n3. First sync\n4. Autosync options"/>
+            <Grid Name="softkeysGrid" ColumnDefinitions="* * *" RowDefinitions="auto" Grid.Row="1">
+                <Button Name="ButtonBack" 
+                        Grid.Column="0"
+                        Margin="10 10 10 10" 
+                        HorizontalAlignment="stretch" 
+                        Text="Back"/>
+                <Button Name="ButtonExit" 
+                        Grid.Column="2"
+                        Margin="10 10 10 10" 
+                        HorizontalAlignment="stretch" 
+                        Text="Exit"/>
+            </Grid>
+            <Keyboard Name="keyboard" 
+                      Grid.Row="2">
+            </Keyboard>
+        </Grid>
+    </Grid>
+</LeahConfMainForm>

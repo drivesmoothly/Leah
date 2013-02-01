@@ -1,0 +1,6 @@
+Implement the following interfaces:
+
+MCoeFepAwareTextEditor
+MCoeFepAwareTextEditor_Extension1
+MAknEdStateObserver
+MCoeMessageMonitorObserver

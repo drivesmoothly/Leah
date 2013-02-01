@@ -1,0 +1,22 @@
+#include "../../def/LeahConsts.hrh"
+
+TARGET          K_LEAH_SERVLIB_FILENAME
+TARGETTYPE      DLL
+UID             0x1000008D K_LEAH_SERVLIB_UID
+SECUREID        K_LEAH_SERVLIB_UID
+
+SOURCEPATH      ../src
+SOURCE          LeahSession.cpp
+
+USERINCLUDE     ../inc
+USERINCLUDE     ../../def
+USERINCLUDE     ../../Service/inc
+USERINCLUDE     ../../Common/inc
+
+SYSTEMINCLUDE   /epoc32/include
+
+LIBRARY         euser.lib
+LIBRARY         estor.lib
+STATICLIBRARY   K_LEAH_COMMON_FRAMEWORK_LIB_FILENAME
+
+CAPABILITY      K_LEAH_SERVLIB_CAPABILITIES

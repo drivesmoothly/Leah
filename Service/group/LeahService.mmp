@@ -1,0 +1,41 @@
+#include "../../def/LeahConsts.hrh"
+
+TARGET          K_LEAH_SERVICE_FILENAME
+TARGETTYPE      EXE
+UID             0 K_LEAH_SERVICE_UID
+SECUREID        K_LEAH_SERVICE_UID
+
+SOURCEPATH      ../src
+SOURCE          LeahServiceEntry.cpp
+SOURCE          LeahServiceServer.cpp
+SOURCE          LeahServiceSession.cpp
+SOURCE          LeahServiceEngine.cpp
+
+SOURCEPATH      ../data
+START RESOURCE  startup.rss
+TARGET          K_LEAH_SERVICE_UID_VALUE
+END 
+
+USERINCLUDE     ../inc
+USERINCLUDE     ../../def
+USERINCLUDE     ../../Common/inc
+USERINCLUDE     ../../Common/inc/controls
+USERINCLUDE     ../../Common/inc/events
+USERINCLUDE     ../../Common/inc/properties
+USERINCLUDE     ../../Common/inc/layout
+
+SYSTEMINCLUDE   APP_LAYER_SYSTEMINCLUDE
+SYSTEMINCLUDE   MW_LAYER_SYSTEMINCLUDE
+SYSTEMINCLUDE   /epoc32/include
+
+LIBRARY         euser.lib
+LIBRARY         etel3rdparty.lib
+LIBRARY         efsrv.lib
+LIBRARY         c32.lib
+LIBRARY         ws32.lib
+LIBRARY         apgrfx.lib
+LIBRARY         estor.lib
+LIBRARY         euserhl.lib
+STATICLIBRARY   K_LEAH_COMMON_FRAMEWORK_LIB_FILENAME
+
+CAPABILITY      K_LEAH_SERVICE_CAPABILITIES

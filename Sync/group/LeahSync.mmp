@@ -1,0 +1,30 @@
+#include        "../../def/LeahConsts.hrh"
+
+TARGET          K_LEAH_SYNC_FILENAME
+TARGETTYPE      DLL
+UID             0x1000008D K_LEAH_SYNC_UID
+SECUREID        K_LEAH_SYNC_UID
+EPOCSTACKSIZE   0x5000
+
+EXPORTUNFROZEN
+
+SOURCEPATH      ../common/src
+
+SOURCEPATH      ../google/src
+
+SOURCEPATH      ../local/src
+
+SOURCEPATH      ../mock/src
+
+USERINCLUDE     ../common/inc
+USERINCLUDE     ../google/inc
+USERINCLUDE     ../local/inc
+USERINCLUDE     ../mock/inc
+USERINCLUDE     ../../def
+
+SYSTEMINCLUDE   /epoc32/include
+
+LIBRARY         euser.lib
+LIBRARY         estor.lib
+
+CAPABILITY      K_LEAH_SYNC_CAPABILITIES
