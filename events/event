@@ -1,0 +1,63 @@
+#ifndef EVENT_H_INCLUDED
+#define EVENT_H_INCLUDED
+
+#include "handlerbase"
+
+///////////////////////////////////////////////////////////////////////////////
+// Event
+///////////////////////////////////////////////////////////////////////////////
+
+template <typename... Args>
+class Event
+{
+private:
+    typedef std::vector<Handler<Args...>*> HandlersVector;
+
+public:
+    Event<Args...>& operator +=(Handler<Args...>* handler)
+    {
+        _handlers.push_back(handler);
+        return *this;
+    }
+    Event<Args...>& operator -=(Handler<Args...>* handler)
+    {
+        auto it = findHandler(*handler);
+        if (it != _handlers.end())
+            _handlers.erase(it);
+        return *this;
+    }
+    ~Event()
+    {
+        for (auto it : _handlers)
+            delete it;
+    }
+
+    void call(Args... args)
+    {
+        for(auto& it : _handlers)
+        {
+            it->Call(args...);
+        }
+    }
+
+    inline void operator()(Args... args)
+    {
+        this->call(args...);
+    }
+
+private:
+    typename HandlersVector::iterator findHandler(const Handler<Args...>& handler)
+    {
+        for (auto it = _handlers.begin(); it != _handlers.end(); ++it)
+        {
+            if (*(*it) == handler)
+                return it;
+        }
+        return _handlers.end();
+    }
+
+private:
+    HandlersVector _handlers;
+};
+
+#endif // EVENT_H_INCLUDED

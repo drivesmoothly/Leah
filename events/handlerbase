@@ -1,0 +1,22 @@
+#ifndef HANDLERBASE_INCLUDED
+#define HANDLERBASE_INCLUDED
+
+#include "handlervisitor"
+
+///////////////////////////////////////////////////////////////////////////////
+// Handler base class
+///////////////////////////////////////////////////////////////////////////////
+
+template <typename... Args>
+class Handler
+{
+public:
+    virtual ~Handler() {}
+    virtual void Call(Args...) = 0;
+    virtual void Accept(HandlerVisitor<Args...>& visitor)
+    {
+        visitor.Visit(*this);
+    };
+};
+
+#endif // HANDLERBASE_INCLUDED

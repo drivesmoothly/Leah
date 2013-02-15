@@ -1,0 +1,13 @@
+#ifndef HANDLERVISITORCOMPARE_INCLUDED
+#define HANDLERVISITORCOMPARE_INCLUDED
+
+#include "handlervisitor"
+
+template <typename... Args>
+class HandlerCompare : public HandlerVisitor<Args...>
+{
+public:
+
+};
+
+#endif //HANDLERVISITORCOMPARE_INCLUDED
