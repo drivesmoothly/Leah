@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1360940120 source:d:\_projects\codeblocks\myfirstconsole\main.cpp
+	<iostream>
+	<vector>
+	"event"
+	"functionhandler"
+	"memberfunctionhandler"
+
+1360939592 d:\_projects\codeblocks\myfirstconsole\events\event
+	"handlerbase"
+
+1360941196 d:\_projects\codeblocks\myfirstconsole\events\handlerbase
+	"handlervisitor"
+
+1360941341 d:\_projects\codeblocks\myfirstconsole\events\handlervisitor
+
+1360941313 d:\_projects\codeblocks\myfirstconsole\events\functionhandler
+	"handlerbase"
+
+1360941450 d:\_projects\codeblocks\myfirstconsole\events\memberfunctionhandler
+	"handlerbase"
+

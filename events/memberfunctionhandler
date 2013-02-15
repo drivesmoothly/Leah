@@ -1,0 +1,62 @@
+#ifndef MEMBERFUNCTIONHANDLER_H_INCLUDED
+#define MEMBERFUNCTIONHANDLER_H_INCLUDED
+
+#include "handlerbase"
+
+template <typename... Args>
+class MethodHandlerBase : public Handler<Args...>
+{
+public:
+    typedef void (MethodHandlerBase::*MemberFunction)();
+
+public:
+    virtual void* GetObjectPtr() = 0;
+    virtual MemberFunction GetMethodPtr() = 0;
+
+    void Accept(HandlerVisitor<Args...> visitor)
+    {
+        visitor.Visit(*this);
+    }
+};
+
+///////////////////////////////////////////////////////////////////////////////
+// Member function handler
+///////////////////////////////////////////////////////////////////////////////
+
+template <class C, typename... Args>
+class MethodHandler : public MethodHandlerBase<Args...>
+{
+public:
+    typedef void (C::*Method)(Args...);
+
+public:
+    MethodHandler(C& owner, Method method) : _owner(&owner), _method(method) {};
+
+    void Call(Args... args)
+    {
+        (_owner->*_method)(args...);
+    }
+
+public: // From MethodHandlerBase
+    void* GetObjectPtr()
+    {
+        return _owner;
+    }
+
+    typename MethodHandlerBase<Args...>::MemberFunction GetMethodPtr()
+    {
+        return (typename MethodHandlerBase<Args...>::MemberFunction)_method;
+    }
+
+private:
+    C* _owner;
+    Method _method;
+};
+
+template <typename C, typename... Args>
+MethodHandler<C, Args...>* newMethodHandler(C& owner, void (C::*method)(Args...))
+{
+    return new MethodHandler<C, Args...>(owner, method);
+}
+
+#endif // MEMBERFUNCTIONHANDLER_H_INCLUDED

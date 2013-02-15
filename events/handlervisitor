@@ -1,0 +1,22 @@
+#ifndef HANDLERVISITOR_INCLUDED
+#define HANDLERVISITOR_INCLUDED
+
+template <typename... Args>
+class Handler;
+
+template <typename... Args>
+class FunctionHandler;
+
+template <typename... Args>
+class MethodHandlerBase;
+
+template <typename... Args>
+class HandlerVisitor
+{
+public:
+    virtual void Visit(const Handler<Args...>&) = 0;
+    virtual void Visit(const FunctionHandler<Args...>&) = 0;
+    virtual void Visit(const MethodHandlerBase<Args...>&) = 0;
+};
+
+#endif //HANDLERVISITOR_INCLUDED
