@@ -3,58 +3,85 @@
 
 #include "handlerbase"
 
-template <typename... Args>
-class MethodHandlerBase : public Handler<Args...>
+///
+/// Member function handler base class
+///
+class MethodHandler : public Handler
 {
-public:
-    typedef void (MethodHandlerBase::*MemberFunction)();
+private: // Data types
+    typedef void (MethodHandler::*MemberFunctionType)();
 
-public:
+public: // New functions
+    ///
+    /// Retrieves the object on which the method will be called.
+    ///
     virtual void* GetObjectPtr() = 0;
-    virtual MemberFunction GetMethodPtr() = 0;
+    ///
+    /// Retrieves the pointer to the method that will be called.
+    ///
+    virtual MemberFunctionType GetMethodPtr() = 0;
 
-    void Accept(HandlerVisitor<Args...> visitor)
+public: // From base classes
+    ///
+    /// From Handler base class.
+    ///
+    void Accept(HandlerVisitor& visitor)
     {
         visitor.Visit(*this);
     }
 };
 
-///////////////////////////////////////////////////////////////////////////////
-// Member function handler
-///////////////////////////////////////////////////////////////////////////////
-
+///
+/// Member function handler
+///
 template <class C, typename... Args>
-class MethodHandler : public MethodHandlerBase<Args...>
+class MethodHandler : public MethodHandler
 {
-public:
+public: // Data types
     typedef void (C::*Method)(Args...);
 
-public:
+public: // Constructors and destructor
+    ///
+    /// Constructor.
+    /// Takes a reference to the object and a pointer to the member function.
+    ///
     MethodHandler(C& owner, Method method) : _owner(&owner), _method(method) {};
 
-    void Call(Args... args)
+public: // New functions
+    ///
+    /// Calls the handler with the given arguments.
+    /// @args args The arguments that will be passed to the handler method.
+    ///
+    inline void Call(Args... args)
     {
         (_owner->*_method)(args...);
     }
 
-public: // From MethodHandlerBase
+public: // From base classes
+    ///
+    /// From MethodHandlerBase, GetObjectPtr.
+    ///
     void* GetObjectPtr()
     {
         return _owner;
     }
-
-    typename MethodHandlerBase<Args...>::MemberFunction GetMethodPtr()
+    ///
+    /// From MethodHandler, GetMethodPtr
+    ///
+    typename MethodHandler::MemberFunction GetMethodPtr()
     {
-        return (typename MethodHandlerBase<Args...>::MemberFunction)_method;
+        return (typename MethodHandlerBase::MemberFunction)_method;
     }
 
-private:
+private: // Data
+    /// The object on which the method will be called.
     C* _owner;
+    /// The method that will be called.
     Method _method;
 };
 
 template <typename C, typename... Args>
-MethodHandler<C, Args...>* newMethodHandler(C& owner, void (C::*method)(Args...))
+MethodHandler<C, Args...>* newHandler(C& owner, void (C::*method)(Args...))
 {
     return new MethodHandler<C, Args...>(owner, method);
 }

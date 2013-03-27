@@ -3,11 +3,16 @@
 
 #include "handlervisitor"
 
-template <typename... Args>
-class HandlerCompare : public HandlerVisitor<Args...>
+class HandlerCompare : public HandlerVisitor
 {
 public:
+    HandlerCompare()
+    {
 
+    }
+
+private:
+    bool _result;
 };
 
 #endif //HANDLERVISITORCOMPARE_INCLUDED

@@ -3,17 +3,20 @@
 
 #include "handlervisitor"
 
-///////////////////////////////////////////////////////////////////////////////
-// Handler base class
-///////////////////////////////////////////////////////////////////////////////
-
-template <typename... Args>
+///
+/// Handler base class
+///
 class Handler
 {
 public:
+    ///
+    /// Virtual destructor.
+    ///
     virtual ~Handler() {}
-    virtual void Call(Args...) = 0;
-    virtual void Accept(HandlerVisitor<Args...>& visitor)
+    ///
+    /// Accept visitor base method.
+    ///
+    virtual void Accept(HandlerVisitor& visitor)
     {
         visitor.Visit(*this);
     };

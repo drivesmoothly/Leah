@@ -3,35 +3,62 @@
 
 #include "handlerbase"
 
-///////////////////////////////////////////////////////////////////////////////
-// Function handler (static or external)
-///////////////////////////////////////////////////////////////////////////////
-
-template <typename... Args>
-class FunctionHandler : public Handler<Args...>
+///
+/// Function handlers base class
+/// Base class for handlers that call non-member functions or static member functions.
+///
+class FunctionHandler : public Handler
 {
-public:
+public: // Data types
+    typedef void (*FunctionType)();
+
+public: // New functions
+    ///
+    /// Retrieves the pointer to the function that will be called.
+    ///
+    virtual FunctionType GetFunctionPtr() = 0;
+
+public: // From base classes
+    ///
+    /// From Handler base class.
+    ///
+    void Accept(HandlerVisitor& visitor)
+    {
+        visitor.Visit(*this);
+    }
+};
+
+///
+/// Function handler (static or external)
+///
+template <typename... Args>
+class FunctionHandler : public FunctionHandler
+{
+public: // Data types
     typedef void (*Function)(Args...);
 
-public:
+public: // Constructors and destructor
+    ///
+    /// Constructor.
+    /// Takes a pointer to the function to be called.
+    ///
     FunctionHandler(Function function) : _function(function) {};
 
-    void Call(Args... args)
+public: // New functions
+    ///
+    /// Call function that calls the handler
+    /// @param args The arguments that will be passed to the handling function.
+    inline void Call(Args... args)
     {
         (*_function)(args...);
     }
 
-    void Accept(HandlerVisitor<Args...>& visitor)
-    {
-        visitor.Visit(*this);
-    }
-
-private:
+private: // Data
     Function _function;
 };
 
 template <typename... Args>
-FunctionHandler<Args...>* newFunctionHandler(void (*func)(Args...))
+FunctionHandler<Args...>* newHandler(void (*func)(Args...))
 {
     return new FunctionHandler<Args...>(func);
 }
