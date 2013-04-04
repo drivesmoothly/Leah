@@ -1,66 +1,54 @@
-#ifndef FUNCTIONHANDLER_H_INCLUDED
-#define FUNCTIONHANDLER_H_INCLUDED
+#ifndef FUNCTIONHANDLER_INCLUDED
+#define FUNCTIONHANDLER_INCLUDED
 
+#include <memory>
 #include "handlerbase"
 
-///
-/// Function handlers base class
-/// Base class for handlers that call non-member functions or static member functions.
-///
-class FunctionHandler : public Handler
+/// Base class for function handlers.
+/// Provides support for visitors.
+class FunctionHandlerBase
 {
-public: // Data types
-    typedef void (*FunctionType)();
+public: // Typedefs
+    /// Defines a pointer to a handling function type.
+    /// Exact prototype is not important since its role is to only be compared.
+    typedef void (*FunctionPtr)();
 
-public: // New functions
-    ///
-    /// Retrieves the pointer to the function that will be called.
-    ///
-    virtual FunctionType GetFunctionPtr() = 0;
-
-public: // From base classes
-    ///
-    /// From Handler base class.
-    ///
-    void Accept(HandlerVisitor& visitor)
-    {
-        visitor.Visit(*this);
-    }
+public:
+    /// Retrieves the address of the handling function.
+    virtual FunctionPtr GetFunctionPtr() = 0;
 };
 
 ///
 /// Function handler (static or external)
 ///
 template <typename... Args>
-class FunctionHandler : public FunctionHandler
+class FunctionHandler : public FunctionHandlerBase, public Handler<Args...>
 {
-public: // Data types
+public: // Typedefs
     typedef void (*Function)(Args...);
 
 public: // Constructors and destructor
-    ///
-    /// Constructor.
-    /// Takes a pointer to the function to be called.
-    ///
+    /// Constructor
+    /// @param function A pointer to the handling function.
     FunctionHandler(Function function) : _function(function) {};
 
-public: // New functions
-    ///
-    /// Call function that calls the handler
-    /// @param args The arguments that will be passed to the handling function.
-    inline void Call(Args... args)
+public: // From Handler<Args...>
+    /// Calls the handling function.
+    void Call(Args... args)
     {
         (*_function)(args...);
     }
 
 private: // Data
+    /// Stores the handling function
     Function _function;
 };
 
+/// Creates a new function handler.
 template <typename... Args>
 FunctionHandler<Args...>* newHandler(void (*func)(Args...))
 {
     return new FunctionHandler<Args...>(func);
 }
 
-#endif // FUNCTIONHANDLER_H_INCLUDED
+#endif // FUNCTIONHANDLER_INCLUDED

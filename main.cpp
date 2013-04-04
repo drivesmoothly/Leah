@@ -2,7 +2,7 @@
 #include <vector>
 #include "event"
 #include "functionhandler"
-#include "memberfunctionhandler"
+#include "methodhandler"
 
 using namespace std;
 
@@ -34,26 +34,26 @@ int main()
     A a;
 
     Event<> myEvent;
-    myEvent += newFunctionHandler(&plm);
-    myEvent += newMethodHandler(a, &A::plm);
+    myEvent += newHandler(&plm);
+    myEvent += newHandler(a, &A::plm);
     // Launch
     myEvent();
 
     Event<int> anotherEvent;
-    anotherEvent += newFunctionHandler(&plm2);
-    anotherEvent += newMethodHandler(a, &A::plm2);
+    anotherEvent += newHandler(&plm2);
+    anotherEvent += newHandler(a, &A::plm2);
     // Launch
     anotherEvent(7);
 
     Event<int, int> yetAnotherEvent;
-    yetAnotherEvent += newFunctionHandler(&plm3);
-    yetAnotherEvent += newMethodHandler(a, &A::plm3);
+    yetAnotherEvent += newHandler(&plm3);
+    yetAnotherEvent += newHandler(a, &A::plm3);
     // Launch
     yetAnotherEvent(7, 13);
 
     Event<int, int> event4;
-    event4 += newFunctionHandler(&plm3);
-    event4 += newMethodHandler(a, &A::plm3);
+    event4 += newHandler(&plm3);
+    event4 += newHandler(a, &A::plm3);
     // Launch
     event4(7, 13);
 

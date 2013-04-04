@@ -5,21 +5,31 @@
 
 ///
 /// Handler base class
+/// Provides support for handler Visitors
 ///
-class Handler
+class HandlerBase
 {
 public:
-    ///
     /// Virtual destructor.
-    ///
-    virtual ~Handler() {}
-    ///
-    /// Accept visitor base method.
-    ///
+    virtual ~HandlerBase() {}
+
+    /// Visitor implementation
     virtual void Accept(HandlerVisitor& visitor)
     {
         visitor.Visit(*this);
-    };
+    }
+};
+
+///
+/// Typed generic Handler class
+/// Base class for all typed handlers.
+///
+template <typename... Args>
+class Handler : public HandlerBase
+{
+public:
+    /// Call prototype.
+    virtual void Call(Args...) = 0;
 };
 
 #endif // HANDLERBASE_INCLUDED

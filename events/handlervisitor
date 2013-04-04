@@ -1,29 +1,21 @@
 #ifndef HANDLERVISITOR_INCLUDED
 #define HANDLERVISITOR_INCLUDED
 
-// FORWARDS
-class Handler;
-class FunctionHandler;
-class MethodHandler;
+/// Forwards
+class HandlerBase;
+class HandlerMethodBase;
+class HandlerFunctionBase;
 
-///
-/// Base class for visitors that visit Handler objects
-///
+/// Visitor base class for handlers
 class HandlerVisitor
 {
 public:
-    ///
-    /// Generic visit method for any handler.
-    ///
-    virtual void Visit(const Handler&) { };
-    ///
-    /// Visit method for handlers that are non-member or static member functions.
-    ///
-    virtual void Visit(const FunctionHandler&) { };
-    ///
-    /// Visit method for handlers that are member functions.
-    ///
-    virtual void Visit(const MethodHandler&) { };
+    /// Visit handlers not specially treated here.
+    virtual void Visit(HandlerBase&) {};
+    /// Visit member function handlers.
+    virtual void Visit(HandlerMethodBase&) {};
+    /// Visit non-member or static member function handlers.
+    virtual void Visit(HandlerFunctionBase&) {};
 };
 
 #endif //HANDLERVISITOR_INCLUDED

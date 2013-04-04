@@ -2,37 +2,43 @@
 #define EVENT_H_INCLUDED
 
 #include "handlerbase"
+#include "notimpl.h"
 
-///////////////////////////////////////////////////////////////////////////////
-// Event
-///////////////////////////////////////////////////////////////////////////////
-
+///
+/// Event class.
+///
 template <typename... Args>
 class Event
 {
-private:
+private: // Typedefs
+    /// The handlers vector
     typedef std::vector<Handler<Args...>*> HandlersVector;
 
-public:
-    Event<Args...>& operator +=(Handler<Args...>* handler)
-    {
-        _handlers.push_back(handler);
-        return *this;
-    }
-    Event<Args...>& operator -=(Handler<Args...>* handler)
-    {
-        auto it = findHandler(*handler);
-        if (it != _handlers.end())
-            _handlers.erase(it);
-        return *this;
-    }
+public: // Constructors and destructor
+    /// Destructor.
     ~Event()
     {
         for (auto it : _handlers)
             delete it;
     }
 
-    void call(Args... args)
+public: // New functions
+    /// Registers a new handler
+    Event<Args...>& operator +=(Handler<Args...>* handler)
+    {
+        _handlers.push_back(handler);
+        return *this;
+    }
+    /// Removes a handler from the list.
+    Event<Args...>& operator -=(Handler<Args...>* handler)
+    {
+        throw new NotImplException;
+        return *this;
+    }
+
+    /// Raise an event.
+    /// All handlers will be called.
+    void Call(Args... args)
     {
         for(auto& it : _handlers)
         {
@@ -40,20 +46,11 @@ public:
         }
     }
 
+    /// Raise an event.
+    /// Synonym to Call, calls all handlers.
     inline void operator()(Args... args)
     {
-        this->call(args...);
-    }
-
-private:
-    typename HandlersVector::iterator findHandler(const Handler<Args...>& handler)
-    {
-        for (auto it = _handlers.begin(); it != _handlers.end(); ++it)
-        {
-            if (*(*it) == handler)
-                return it;
-        }
-        return _handlers.end();
+        this->Call(args...);
     }
 
 private:

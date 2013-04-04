@@ -1,0 +1,79 @@
+#ifndef METHODHANDLER_INCLUDED
+#define METHODHANDLER_INCLUDED
+
+#include <memory>
+#include "handlerbase"
+
+/// Base class for method handlers.
+/// Provides support for visitors.
+class MethodHandlerBase
+{
+public: // Typedefs
+    /// Defines a pointer to a member function type.
+    /// Exact prototype is not important since its role is to only be compared.
+    typedef void (MethodHandlerBase::*MemberFunctionPtr)();
+
+public:
+    /// Retrieves the handler object.
+    virtual void* GetObjectPtr() = 0;
+    /// Retrieves the address of the handler member function.
+    virtual MemberFunctionPtr GetMethodPtr() = 0;
+};
+
+///
+/// Member function handler
+///
+template <class C, typename... Args>
+class MethodHandler : public MethodHandlerBase, public Handler<Args...>
+{
+public: // Typedefs
+    /// The pointer to member function type.
+    typedef void (C::*Method)(Args...);
+
+public: // Constructors and destructor
+    /// Constructor
+    /// @param owner The object the method will be called on.
+    /// @param method The method to be called
+    MethodHandler(C& owner, Method method) : _owner(&owner), _method(method) {};
+
+public: // From base Handler<Args...>
+    /// From Handler<Args...>, calls the handling member function.
+    void Call(Args... args)
+    {
+        (_owner->*_method)(args...);
+    }
+
+    /// Accepts visitors
+    void Accept(HandlerVisitor& visitor)
+    {
+        visitor.Visit(*this);
+    }
+
+public: // From MethodHandlerBase
+    /// Retrieves the handling object's address.
+    void* GetObjectPtr()
+    {
+        return (void*)_owner;
+    }
+
+    /// Retrieves the handling member function's address.
+    MethodHandlerBase::MemberFunctionPtr GetMethodPtr()
+    {
+        return (typename MethodHandlerBase::MemberFunctionPtr)_method;
+    }
+
+private:
+    /// The handling object.
+    C* _owner;
+    /// The handling method.
+    Method _method;
+};
+
+/// Creates a new method handler.
+template <typename C, typename... Args>
+MethodHandler<C, Args...>* newHandler(C& owner, void (C::*method)(Args...))
+{
+    return new MethodHandler<C, Args...>(owner, method);
+}
+
+#endif // METHODHANDLER_INCLUDED
