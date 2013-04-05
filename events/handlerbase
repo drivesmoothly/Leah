@@ -27,9 +27,39 @@ public:
 template <typename... Args>
 class Handler : public HandlerBase
 {
-public:
+public: // Typedefs
+    /// A handler object type.
+    typedef std::shared_ptr<Handler<Args...>> HandlerObjectType;
+    /// The self type
+    typedef Handler<Args...> SelfType;
+
+public: // New functions
     /// Call prototype.
-    virtual void Call(Args...) = 0;
+    virtual void Call(Args... args)
+    {
+        if (_nextHandler)
+        {
+            _nextHandler->Call(args...);
+        }
+    }
+
+    /// Links another handler
+    inline SelfType& operator += (HandlerObjectType handler)
+    {
+        if (_nextHandler)
+        {
+            (*_nextHandler) += handler;
+        }
+        else
+        {
+            _nextHandler = handler;
+        }
+        return *this;
+    }
+
+protected: // Data
+    /// Link to the next handler
+    HandlerObjectType _nextHandler;
 };
 
 #endif // HANDLERBASE_INCLUDED

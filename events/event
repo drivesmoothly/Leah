@@ -1,6 +1,7 @@
 #ifndef EVENT_H_INCLUDED
 #define EVENT_H_INCLUDED
 
+#include <memory>
 #include "handlerbase"
 #include "notimpl.h"
 
@@ -11,26 +12,35 @@ template <typename... Args>
 class Event
 {
 private: // Typedefs
-    /// The handlers vector
-    typedef std::vector<Handler<Args...>*> HandlersVector;
+    /// The self type
+    typedef Event<Args...> SelfType;
+    typedef Handler<Args...> HandlerType;
 
 public: // Constructors and destructor
     /// Destructor.
     ~Event()
     {
-        for (auto it : _handlers)
-            delete it;
+        // No implementation required.
+        // The handler will clean itself up.
     }
 
 public: // New functions
     /// Registers a new handler
-    Event<Args...>& operator +=(Handler<Args...>* handler)
+    inline SelfType& operator +=(typename HandlerType::HandlerObjectType handler)
     {
-        _handlers.push_back(handler);
+        if (_handler)
+        {
+            (*_handler) += handler;
+        }
+        else
+        {
+            _handler = handler;
+        }
         return *this;
     }
+
     /// Removes a handler from the list.
-    Event<Args...>& operator -=(Handler<Args...>* handler)
+    inline SelfType& operator -=(typename HandlerType::HandlerObjectType handler)
     {
         throw new NotImplException;
         return *this;
@@ -38,23 +48,24 @@ public: // New functions
 
     /// Raise an event.
     /// All handlers will be called.
-    void Call(Args... args)
+    inline void Raise(Args... args)
     {
-        for(auto& it : _handlers)
+        if (_handler)
         {
-            it->Call(args...);
+            _handler->Call(args...);
         }
     }
 
     /// Raise an event.
-    /// Synonym to Call, calls all handlers.
+    /// Synonym to Raise, calls all handlers.
     inline void operator()(Args... args)
     {
-        this->Call(args...);
+        this->Raise(args...);
     }
 
-private:
-    HandlersVector _handlers;
+private: // Data
+    /// Stores the handler
+    typename HandlerType::HandlerObjectType _handler;
 };
 
 #endif // EVENT_H_INCLUDED

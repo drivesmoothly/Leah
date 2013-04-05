@@ -4,8 +4,10 @@
 #include <memory>
 #include "handlerbase"
 
+///
 /// Base class for function handlers.
 /// Provides support for visitors.
+///
 class FunctionHandlerBase
 {
 public: // Typedefs
@@ -25,30 +27,38 @@ template <typename... Args>
 class FunctionHandler : public FunctionHandlerBase, public Handler<Args...>
 {
 public: // Typedefs
-    typedef void (*Function)(Args...);
+    typedef void (*FunctionType)(Args...);
 
 public: // Constructors and destructor
     /// Constructor
     /// @param function A pointer to the handling function.
-    FunctionHandler(Function function) : _function(function) {};
+    FunctionHandler(FunctionType function) : _function(function) {};
 
 public: // From Handler<Args...>
     /// Calls the handling function.
     void Call(Args... args)
     {
         (*_function)(args...);
+        Handler<Args...>::Call(args...);
+    }
+
+public: // From FunctionHandlerBase
+    /// Retrieves a pointer to the handling function
+    FunctionHandlerBase::FunctionPtr GetFunctionPtr()
+    {
+        return (FunctionHandlerBase::FunctionPtr)_function;
     }
 
 private: // Data
     /// Stores the handling function
-    Function _function;
+    FunctionType _function;
 };
 
 /// Creates a new function handler.
 template <typename... Args>
-FunctionHandler<Args...>* newHandler(void (*func)(Args...))
+std::shared_ptr<Handler<Args...>> newHandler(void (*func)(Args...))
 {
-    return new FunctionHandler<Args...>(func);
+    return std::shared_ptr<Handler<Args...>>(new FunctionHandler<Args...>(func));
 }
 
 #endif // FUNCTIONHANDLER_INCLUDED

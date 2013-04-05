@@ -4,8 +4,10 @@
 #include <memory>
 #include "handlerbase"
 
+///
 /// Base class for method handlers.
 /// Provides support for visitors.
+///
 class MethodHandlerBase
 {
 public: // Typedefs
@@ -28,19 +30,20 @@ class MethodHandler : public MethodHandlerBase, public Handler<Args...>
 {
 public: // Typedefs
     /// The pointer to member function type.
-    typedef void (C::*Method)(Args...);
+    typedef void (C::*MethodType)(Args...);
 
 public: // Constructors and destructor
     /// Constructor
     /// @param owner The object the method will be called on.
     /// @param method The method to be called
-    MethodHandler(C& owner, Method method) : _owner(&owner), _method(method) {};
+    MethodHandler(C& owner, MethodType method) : _owner(&owner), _method(method) {};
 
 public: // From base Handler<Args...>
     /// From Handler<Args...>, calls the handling member function.
     void Call(Args... args)
     {
         (_owner->*_method)(args...);
+        Handler<Args...>::Call(args...);
     }
 
     /// Accepts visitors
@@ -66,14 +69,14 @@ private:
     /// The handling object.
     C* _owner;
     /// The handling method.
-    Method _method;
+    MethodType _method;
 };
 
 /// Creates a new method handler.
 template <typename C, typename... Args>
-MethodHandler<C, Args...>* newHandler(C& owner, void (C::*method)(Args...))
+std::shared_ptr<Handler<Args...>> newHandler(C& owner, void (C::*method)(Args...))
 {
-    return new MethodHandler<C, Args...>(owner, method);
+    return std::shared_ptr<Handler<Args...>>(new MethodHandler<C, Args...>(owner, method));
 }
 
 #endif // METHODHANDLER_INCLUDED
