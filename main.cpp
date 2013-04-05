@@ -5,18 +5,17 @@
 #include "methodhandler"
 
 using namespace std;
-
-void plm()
+void plm0()
 {
     std::cout << "plm called" << std::endl;
 }
 
-void plm2(int value)
+void plm1(int value)
 {
     cout << "plm2 called, value = " << value << endl;
 }
 
-void plm3(int value1, int value2)
+void plm2(int value1, int value2)
 {
     cout << "plm3 called, values= " << value1 << "," << value2 << endl;
 }
@@ -24,40 +23,48 @@ void plm3(int value1, int value2)
 class A
 {
 public:
-    void plm() { cout << "A::plm called" << endl; }
-    void plm2(int value) { cout << "A::plm2 called, value= " << value << endl; }
-    void plm3(int value1, int value2) { cout << "A::plm3 called, values= " << value1 << "," << value2 << endl; }
+    void plm0()
+    {
+        cout << "A::plm called" << endl;
+    }
+    void plm1(int value)
+    {
+        cout << "A::plm2 called, value= " << value << endl;
+    }
+    void plm2(int value1, int value2)
+    {
+        cout << "A::plm3 called, values= " << value1 << "," << value2 << endl;
+    }
 };
 
 int main()
 {
+    // An object to call the handlers on.
     A a;
 
-    Event<> myEvent;
-    myEvent += newHandler(&plm);
-    myEvent += newHandler(a, &A::plm);
-    // Launch
-    myEvent();
+    // Declare the event
+    Event<> myEvent1;
+    // Register handlers
+    myEvent1 += newHandler(&plm0);
+    myEvent1 += newHandler(a, &A::plm0);
+    // Raise the event
+    myEvent1();
 
-    Event<int> anotherEvent;
-    anotherEvent += newHandler(&plm2);
-    anotherEvent += newHandler(a, &A::plm2);
-    // Launch
-    anotherEvent(7);
+    // Declare the event
+    Event<int> myEvent2;
+    // Register handlers
+    myEvent2 += newHandler(&plm1);
+    myEvent2 += newHandler(a, &A::plm1);
+    // Raise the event
+    myEvent2(7);
 
-    Event<int, int> yetAnotherEvent;
-    yetAnotherEvent += newHandler(&plm3);
-    yetAnotherEvent += newHandler(a, &A::plm3);
-    // Launch
-    yetAnotherEvent(7, 13);
-
-    Event<int, int> event4;
-    event4 += newHandler(&plm3);
-    event4 += newHandler(a, &A::plm3);
-    // Launch
-    event4(7, 13);
-
-    Event<int, int, int> event5;
+    // Declare the event
+    Event<int, int> myEvent3;
+    // Register handlers
+    myEvent3 += newHandler(&plm2);
+    myEvent3 += newHandler(a, &A::plm2);
+    // Raise the event
+    myEvent3(7, 13);
 
     return 0;
 }
