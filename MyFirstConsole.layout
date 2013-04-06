@@ -1,39 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="events\handlerbase" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="455" topLine="0" />
-		</Cursor>
+	<File name="events/event" open="0" top="0" tabpos="2">
+		<Cursor position="1136" topLine="6" />
 	</File>
-	<File name="events\functionhandler" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="688" topLine="1" />
-		</Cursor>
+	<File name="events/functionhandler" open="0" top="0" tabpos="4">
+		<Cursor position="1236" topLine="24" />
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="713" topLine="0" />
-		</Cursor>
+	<File name="events/functionhandlercomparer.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="631" topLine="0" />
 	</File>
-	<File name="events\handlervisitor" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="510" topLine="0" />
-		</Cursor>
+	<File name="events/functionhandlercomparer.h" open="0" top="0" tabpos="0">
+		<Cursor position="163" topLine="0" />
 	</File>
-	<File name="events\memberfunctionhandler" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1246" topLine="0" />
-		</Cursor>
+	<File name="events/handlerbase" open="0" top="0" tabpos="5">
+		<Cursor position="385" topLine="0" />
 	</File>
-	<File name="events\event" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="294" topLine="0" />
-		</Cursor>
+	<File name="events/handlercomparer.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="408" topLine="0" />
 	</File>
-	<File name="events\handlervisitorcompare" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="207" topLine="0" />
-		</Cursor>
+	<File name="events/handlercomparer.h" open="0" top="0" tabpos="0">
+		<Cursor position="541" topLine="0" />
+	</File>
+	<File name="events/handlercompareselector.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="848" topLine="0" />
+	</File>
+	<File name="events/handlercompareselector.h" open="0" top="0" tabpos="0">
+		<Cursor position="428" topLine="0" />
+	</File>
+	<File name="events/handlervisitor" open="0" top="0" tabpos="6">
+		<Cursor position="546" topLine="0" />
+	</File>
+	<File name="events/methodcomparer.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="52" topLine="0" />
+	</File>
+	<File name="events/methodcomparer.h" open="0" top="0" tabpos="0">
+		<Cursor position="139" topLine="0" />
+	</File>
+	<File name="events/methodhandler" open="0" top="0" tabpos="3">
+		<Cursor position="2057" topLine="37" />
+	</File>
+	<File name="generic/notimpl.h" open="0" top="0" tabpos="7">
+		<Cursor position="295" topLine="0" />
+	</File>
+	<File name="main.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="794" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

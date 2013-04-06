@@ -12,9 +12,10 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-std=c++11" />
 					<Add option="-g" />
+					<Add option="-std=c++11" />
 					<Add directory="events" />
+					<Add directory="generic" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -38,10 +39,18 @@
 		</Compiler>
 		<Unit filename="events/event" />
 		<Unit filename="events/functionhandler" />
+		<Unit filename="events/functionhandlercomparer.cpp" />
+		<Unit filename="events/functionhandlercomparer.h" />
 		<Unit filename="events/handlerbase" />
+		<Unit filename="events/handlercomparer.cpp" />
+		<Unit filename="events/handlercomparer.h" />
+		<Unit filename="events/handlercompareselector.cpp" />
+		<Unit filename="events/handlercompareselector.h" />
 		<Unit filename="events/handlervisitor" />
-		<Unit filename="events/handlervisitorcompare" />
-		<Unit filename="events/memberfunctionhandler" />
+		<Unit filename="events/methodcomparer.cpp" />
+		<Unit filename="events/methodcomparer.h" />
+		<Unit filename="events/methodhandler" />
+		<Unit filename="generic/notimpl.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

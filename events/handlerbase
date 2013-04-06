@@ -2,21 +2,77 @@
 #define HANDLERBASE_INCLUDED
 
 #include "handlervisitor"
+#include <memory>
 
-///////////////////////////////////////////////////////////////////////////////
-// Handler base class
-///////////////////////////////////////////////////////////////////////////////
-
-template <typename... Args>
-class Handler
+///
+/// Handler base class
+/// Provides support for handler Visitors
+///
+class HandlerBase
 {
 public:
-    virtual ~Handler() {}
-    virtual void Call(Args...) = 0;
-    virtual void Accept(HandlerVisitor<Args...>& visitor)
+    /// Virtual destructor.
+    virtual ~HandlerBase() {}
+
+    /// Visitor implementation
+    virtual void Accept(HandlerVisitor& visitor)
     {
         visitor.Visit(*this);
-    };
+    }
+};
+
+///
+/// Typed generic Handler class
+/// Base class for all typed handlers.
+///
+template <typename... Args>
+class Handler : public HandlerBase
+{
+public: // Typedefs
+    /// A handler object type.
+    typedef std::shared_ptr<Handler<Args...>> HandlerObjectType;
+    /// The self type
+    typedef Handler<Args...> SelfType;
+
+public: // New functions
+    /// Call prototype.
+    virtual void Call(Args... args)
+    {
+        if (_nextHandler)
+        {
+            _nextHandler->Call(args...);
+        }
+    }
+
+    /// Links another handler
+    inline SelfType& operator += (HandlerObjectType handler)
+    {
+        if (_nextHandler)
+        {
+            (*_nextHandler) += handler;
+        }
+        else
+        {
+            _nextHandler = handler;
+        }
+        return *this;
+    }
+
+    /// Retrieve the next handler
+    inline HandlerObjectType NextHandler() const
+    {
+        return _nextHandler;
+    }
+
+    /// Sets the next handler
+    inline void SetNextHandler(HandlerObjectType handler)
+    {
+        _nextHandler = handler;
+    }
+
+protected: // Data
+    /// Link to the next handler
+    HandlerObjectType _nextHandler;
 };
 
 #endif // HANDLERBASE_INCLUDED
