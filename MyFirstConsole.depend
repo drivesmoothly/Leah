@@ -20,3 +20,97 @@
 1360941450 d:\_projects\codeblocks\myfirstconsole\events\memberfunctionhandler
 	"handlerbase"
 
+<<<<<<< HEAD
+=======
+1365150244 source:/home/marius/Documents/CodeBlocks/Leah/main.cpp
+	<iostream>
+	<vector>
+	"event"
+	"functionhandler"
+	"methodhandler"
+
+1365150318 /home/marius/Documents/CodeBlocks/Leah/events/event
+	<memory>
+	"handlerbase"
+	"notimpl.h"
+
+1365150202 /home/marius/Documents/CodeBlocks/Leah/events/handlerbase
+	"handlervisitor"
+
+1365148037 /home/marius/Documents/CodeBlocks/Leah/events/handlervisitor
+
+1365148037 /home/marius/Documents/CodeBlocks/Leah/generic/notimpl.h
+	<exception>
+
+1365150350 /home/marius/Documents/CodeBlocks/Leah/events/functionhandler
+	<memory>
+	"handlerbase"
+
+1365150343 /home/marius/Documents/CodeBlocks/Leah/events/methodhandler
+	<memory>
+	"handlerbase"
+
+1365254885 source:/home/rica/Documents/CodeBlocks/Leah/main.cpp
+	<iostream>
+	"event"
+	"functionhandler"
+	"methodhandler"
+
+1365254824 /home/rica/Documents/CodeBlocks/Leah/events/event
+	<memory>
+	"handlerbase"
+	"notimpl.h"
+	"handlercomparer.h"
+	"handlercompareselector.h"
+
+1365253585 /home/rica/Documents/CodeBlocks/Leah/events/handlerbase
+	"handlervisitor"
+	<memory>
+
+1365255624 /home/rica/Documents/CodeBlocks/Leah/events/handlervisitor
+
+1365111701 /home/rica/Documents/CodeBlocks/Leah/generic/notimpl.h
+	<exception>
+
+1365255564 /home/rica/Documents/CodeBlocks/Leah/events/functionhandler
+	<memory>
+	"handlerbase"
+
+1365255582 /home/rica/Documents/CodeBlocks/Leah/events/methodhandler
+	<memory>
+	"handlerbase"
+
+1365249521 source:/home/rica/Documents/CodeBlocks/Leah/events/functionhandlercomparer.cpp
+	"functionhandlercomparer.h"
+	"functionhandler"
+
+1365249503 /home/rica/Documents/CodeBlocks/Leah/events/functionhandlercomparer.h
+	"handlercomparer.h"
+
+1365251075 /home/rica/Documents/CodeBlocks/Leah/events/handlercomparer.h
+	"handlervisitor"
+
+1365251129 source:/home/rica/Documents/CodeBlocks/Leah/events/handlercomparer.cpp
+	"handlercomparer.h"
+	"handlerbase"
+
+1365254739 source:/home/rica/Documents/CodeBlocks/Leah/events/handlercompareselector.cpp
+	"handlercompareselector.h"
+	"handlercomparer.h"
+	"notimpl.h"
+	"handlerbase"
+	"methodcomparer.h"
+	"functionhandlercomparer.h"
+
+1365250830 /home/rica/Documents/CodeBlocks/Leah/events/handlercompareselector.h
+	"handlervisitor"
+	<memory>
+
+1365249811 /home/rica/Documents/CodeBlocks/Leah/events/methodcomparer.h
+	"handlercomparer.h"
+
+1365249824 source:/home/rica/Documents/CodeBlocks/Leah/events/methodcomparer.cpp
+	"methodcomparer.h"
+	"methodhandler"
+
+>>>>>>> ongoing

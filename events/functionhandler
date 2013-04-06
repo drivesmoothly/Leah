@@ -1,39 +1,69 @@
-#ifndef FUNCTIONHANDLER_H_INCLUDED
-#define FUNCTIONHANDLER_H_INCLUDED
+#ifndef FUNCTIONHANDLER_INCLUDED
+#define FUNCTIONHANDLER_INCLUDED
 
+#include <memory>
 #include "handlerbase"
 
-///////////////////////////////////////////////////////////////////////////////
-// Function handler (static or external)
-///////////////////////////////////////////////////////////////////////////////
-
-template <typename... Args>
-class FunctionHandler : public Handler<Args...>
+///
+/// Base class for function handlers.
+/// Provides support for visitors.
+///
+class FunctionHandlerBase
 {
-public:
-    typedef void (*Function)(Args...);
+public: // Typedefs
+    /// Defines a pointer to a handling function type.
+    /// Exact prototype is not important since its role is to only be compared.
+    typedef void (*FunctionPtr)();
 
 public:
-    FunctionHandler(Function function) : _function(function) {};
+    /// Retrieves the address of the handling function.
+    virtual FunctionPtr GetFunctionPtr() = 0;
+};
 
+///
+/// Function handler (static or external)
+///
+template <typename... Args>
+class FunctionHandler : public FunctionHandlerBase, public Handler<Args...>
+{
+public: // Typedefs
+    typedef void (*FunctionType)(Args...);
+
+public: // Constructors and destructor
+    /// Constructor
+    /// @param function A pointer to the handling function.
+    FunctionHandler(FunctionType function) : _function(function) {};
+
+public: // From Handler<Args...>
+    /// Calls the handling function.
     void Call(Args... args)
     {
         (*_function)(args...);
+        Handler<Args...>::Call(args...);
     }
-
-    void Accept(HandlerVisitor<Args...>& visitor)
+    /// Accept visitors
+    void Accept(HandlerVisitor& visitor)
     {
-        visitor.Visit(*this);
+        visitor.Visit((FunctionHandlerBase&)*this);
     }
 
-private:
-    Function _function;
+public: // From FunctionHandlerBase
+    /// Retrieves a pointer to the handling function
+    typename FunctionHandlerBase::FunctionPtr GetFunctionPtr()
+    {
+        return (FunctionHandlerBase::FunctionPtr)_function;
+    }
+
+private: // Data
+    /// Stores the handling function
+    FunctionType _function;
 };
 
+/// Creates a new function handler.
 template <typename... Args>
-FunctionHandler<Args...>* newFunctionHandler(void (*func)(Args...))
+std::shared_ptr<Handler<Args...>> newHandler(void (*func)(Args...))
 {
-    return new FunctionHandler<Args...>(func);
+    return std::shared_ptr<Handler<Args...>>(new FunctionHandler<Args...>(func));
 }
 
-#endif // FUNCTIONHANDLER_H_INCLUDED
+#endif // FUNCTIONHANDLER_INCLUDED

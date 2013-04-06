@@ -1,63 +1,108 @@
 #ifndef EVENT_H_INCLUDED
 #define EVENT_H_INCLUDED
 
+#include <memory>
 #include "handlerbase"
+#include "notimpl.h"
+#include "handlercomparer.h"
+#include "handlercompareselector.h"
 
-///////////////////////////////////////////////////////////////////////////////
-// Event
-///////////////////////////////////////////////////////////////////////////////
-
+///
+/// Event class.
+///
 template <typename... Args>
 class Event
 {
-private:
-    typedef std::vector<Handler<Args...>*> HandlersVector;
+private: // Typedefs
+    /// The self type
+    typedef Event<Args...> SelfType;
+    typedef Handler<Args...> HandlerType;
 
-public:
-    Event<Args...>& operator +=(Handler<Args...>* handler)
-    {
-        _handlers.push_back(handler);
-        return *this;
-    }
-    Event<Args...>& operator -=(Handler<Args...>* handler)
-    {
-        auto it = findHandler(*handler);
-        if (it != _handlers.end())
-            _handlers.erase(it);
-        return *this;
-    }
+public: // Constructors and destructor
+    /// Destructor.
     ~Event()
     {
-        for (auto it : _handlers)
-            delete it;
+        // No implementation required.
+        // The handler will clean itself up.
     }
 
-    void call(Args... args)
+public: // New functions
+    /// Registers a new handler
+    inline SelfType& operator +=(typename HandlerType::HandlerObjectType handler)
     {
-        for(auto& it : _handlers)
+        if (_handler)
         {
-            it->Call(args...);
+            (*_handler) += handler;
+        }
+        else
+        {
+            _handler = handler;
+        }
+        return *this;
+    }
+
+    /// Removes a handler from the list.
+    inline SelfType& operator -=(typename HandlerType::HandlerObjectType handler)
+    {
+        if (_handler && handler)
+        {
+            HandlerComparerSelector comparerSelector;
+            auto comparer = comparerSelector.CreateComparer(*handler);
+            if (comparer)
+                RemoveHandlers(comparer);
+        }
+        return *this;
+    }
+
+    /// Raise an event.
+    /// All handlers will be called.
+    inline void Raise(Args... args)
+    {
+        if (_handler)
+        {
+            _handler->Call(args...);
         }
     }
 
+    /// Raise an event.
+    /// Synonym to Raise, calls all handlers.
     inline void operator()(Args... args)
     {
-        this->call(args...);
+        this->Raise(args...);
     }
 
-private:
-    typename HandlersVector::iterator findHandler(const Handler<Args...>& handler)
+protected: // New functions
+    /// Removes all handlers that match the given comparer
+    void RemoveHandlers(std::shared_ptr<HandlerComparer> comparer)
     {
-        for (auto it = _handlers.begin(); it != _handlers.end(); ++it)
+        if (!comparer)
+            return;
+        if (!_handler)
+            return;
+        // While the first handler matches the comparer, keep removing the first handler
+        while (_handler && comparer->Equals(*_handler))
         {
-            if (*(*it) == handler)
-                return it;
+            _handler = _handler->NextHandler();
         }
-        return _handlers.end();
+        // Remove all handlers that match the comparer from the linked list
+        auto currentHandler = _handler;
+        while (currentHandler)
+        {
+            auto nextHandler = currentHandler->NextHandler();
+            if (nextHandler && comparer->Equals(*nextHandler))
+            {
+                currentHandler->SetNextHandler(nextHandler->NextHandler());
+            }
+            else
+            {
+                currentHandler = currentHandler->NextHandler();
+            }
+        }
     }
 
-private:
-    HandlersVector _handlers;
+private: // Data
+    /// Stores the handler
+    typename HandlerType::HandlerObjectType _handler;
 };
 
 #endif // EVENT_H_INCLUDED

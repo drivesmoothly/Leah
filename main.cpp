@@ -1,63 +1,81 @@
 #include <iostream>
-#include <vector>
 #include "event"
 #include "functionhandler"
-#include "memberfunctionhandler"
+#include "methodhandler"
 
 using namespace std;
 
-void plm()
+void plm0()
 {
-    std::cout << "plm called" << std::endl;
+    std::cout << "plm0 called" << std::endl;
 }
 
-void plm2(int value)
+void plm1(int value)
 {
-    cout << "plm2 called, value = " << value << endl;
+    cout << "plm1 called, value = " << value << endl;
 }
 
-void plm3(int value1, int value2)
+void plm2(int value1, int value2)
 {
-    cout << "plm3 called, values= " << value1 << "," << value2 << endl;
+    cout << "plm2 called, values= " << value1 << "," << value2 << endl;
 }
 
 class A
 {
 public:
-    void plm() { cout << "A::plm called" << endl; }
-    void plm2(int value) { cout << "A::plm2 called, value= " << value << endl; }
-    void plm3(int value1, int value2) { cout << "A::plm3 called, values= " << value1 << "," << value2 << endl; }
+    void plm0()
+    {
+        cout << "A::plm0 called" << endl;
+    }
+    void plm1(int value)
+    {
+        cout << "A::plm1 called, value= " << value << endl;
+    }
+    void plm2(int value1, int value2)
+    {
+        cout << "A::plm2 called, values= " << value1 << "," << value2 << endl;
+    }
 };
 
 int main()
 {
+    // An object to call the handlers on.
     A a;
 
-    Event<> myEvent;
-    myEvent += newFunctionHandler(&plm);
-    myEvent += newMethodHandler(a, &A::plm);
-    // Launch
-    myEvent();
+    // Declare the event
+    Event<> myEvent1;
+    // Register handlers
+    myEvent1 += newHandler(&plm0);
+    myEvent1 += newHandler(a, &A::plm0);
+    // Raise the event
+    myEvent1();
 
-    Event<int> anotherEvent;
-    anotherEvent += newFunctionHandler(&plm2);
-    anotherEvent += newMethodHandler(a, &A::plm2);
-    // Launch
-    anotherEvent(7);
+    cout << endl << "remove a handler" << endl;
 
-    Event<int, int> yetAnotherEvent;
-    yetAnotherEvent += newFunctionHandler(&plm3);
-    yetAnotherEvent += newMethodHandler(a, &A::plm3);
-    // Launch
-    yetAnotherEvent(7, 13);
+    // Remove a handler
+    myEvent1 -= newHandler(&plm0);
+    // Raise the event
+    myEvent1();
 
-    Event<int, int> event4;
-    event4 += newFunctionHandler(&plm3);
-    event4 += newMethodHandler(a, &A::plm3);
-    // Launch
-    event4(7, 13);
+    cout << endl;
 
-    Event<int, int, int> event5;
+    // Declare the event
+    Event<int> myEvent2;
+    // Register handlers
+    myEvent2 += newHandler(&plm1);
+    myEvent2 += newHandler(a, &A::plm1);
+    // Raise the event
+    myEvent2(7);
+
+    cout << endl;
+
+    // Declare the event
+    Event<int, int> myEvent3;
+    // Register handlers
+    myEvent3 += newHandler(&plm2);
+    myEvent3 += newHandler(a, &A::plm2);
+    // Raise the event
+    myEvent3(7, 13);
 
     return 0;
 }
