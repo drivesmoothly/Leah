@@ -3,19 +3,19 @@
 
 /// Forwards
 class HandlerBase;
-class HandlerMethodBase;
-class HandlerFunctionBase;
+class MethodHandlerBase;
+class FunctionHandlerBase;
 
 /// Visitor base class for handlers
 class HandlerVisitor
 {
 public:
     /// Visit handlers not specially treated here.
-    virtual void Visit(HandlerBase&) {};
+    virtual void Visit(HandlerBase&) = 0;
     /// Visit member function handlers.
-    virtual void Visit(HandlerMethodBase&) {};
+    virtual void Visit(MethodHandlerBase&) = 0;
     /// Visit non-member or static member function handlers.
-    virtual void Visit(HandlerFunctionBase&) {};
+    virtual void Visit(FunctionHandlerBase&) = 0;
 };
 
 #endif //HANDLERVISITOR_INCLUDED

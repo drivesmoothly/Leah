@@ -4,6 +4,8 @@
 #include <memory>
 #include "handlerbase"
 #include "notimpl.h"
+#include "handlercomparer.h"
+#include "handlercompareselector.h"
 
 ///
 /// Event class.
@@ -42,7 +44,13 @@ public: // New functions
     /// Removes a handler from the list.
     inline SelfType& operator -=(typename HandlerType::HandlerObjectType handler)
     {
-        throw new NotImplException;
+        if (_handler && handler)
+        {
+            HandlerComparerSelector comparerSelector;
+            auto comparer = comparerSelector.CreateComparer(*handler);
+            if (comparer)
+                RemoveHandlers(comparer);
+        }
         return *this;
     }
 
@@ -61,6 +69,35 @@ public: // New functions
     inline void operator()(Args... args)
     {
         this->Raise(args...);
+    }
+
+protected: // New functions
+    /// Removes all handlers that match the given comparer
+    void RemoveHandlers(std::shared_ptr<HandlerComparer> comparer)
+    {
+        if (!comparer)
+            return;
+        if (!_handler)
+            return;
+        // While the first handler matches the comparer, keep removing the first handler
+        while (_handler && comparer->Equals(*_handler))
+        {
+            _handler = _handler->NextHandler();
+        }
+        // Remove all handlers that match the comparer from the linked list
+        auto currentHandler = _handler;
+        while (currentHandler)
+        {
+            auto nextHandler = currentHandler->NextHandler();
+            if (nextHandler && comparer->Equals(*nextHandler))
+            {
+                currentHandler->SetNextHandler(nextHandler->NextHandler());
+            }
+            else
+            {
+                currentHandler = currentHandler->NextHandler();
+            }
+        }
     }
 
 private: // Data

@@ -2,6 +2,7 @@
 #define HANDLERBASE_INCLUDED
 
 #include "handlervisitor"
+#include <memory>
 
 ///
 /// Handler base class
@@ -55,6 +56,18 @@ public: // New functions
             _nextHandler = handler;
         }
         return *this;
+    }
+
+    /// Retrieve the next handler
+    inline HandlerObjectType NextHandler() const
+    {
+        return _nextHandler;
+    }
+
+    /// Sets the next handler
+    inline void SetNextHandler(HandlerObjectType handler)
+    {
+        _nextHandler = handler;
     }
 
 protected: // Data

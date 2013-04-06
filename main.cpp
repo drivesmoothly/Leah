@@ -7,17 +7,17 @@ using namespace std;
 
 void plm0()
 {
-    std::cout << "plm called" << std::endl;
+    std::cout << "plm0 called" << std::endl;
 }
 
 void plm1(int value)
 {
-    cout << "plm2 called, value = " << value << endl;
+    cout << "plm1 called, value = " << value << endl;
 }
 
 void plm2(int value1, int value2)
 {
-    cout << "plm3 called, values= " << value1 << "," << value2 << endl;
+    cout << "plm2 called, values= " << value1 << "," << value2 << endl;
 }
 
 class A
@@ -25,15 +25,15 @@ class A
 public:
     void plm0()
     {
-        cout << "A::plm called" << endl;
+        cout << "A::plm0 called" << endl;
     }
     void plm1(int value)
     {
-        cout << "A::plm2 called, value= " << value << endl;
+        cout << "A::plm1 called, value= " << value << endl;
     }
     void plm2(int value1, int value2)
     {
-        cout << "A::plm3 called, values= " << value1 << "," << value2 << endl;
+        cout << "A::plm2 called, values= " << value1 << "," << value2 << endl;
     }
 };
 
@@ -50,6 +50,15 @@ int main()
     // Raise the event
     myEvent1();
 
+    cout << endl << "remove a handler" << endl;
+
+    // Remove a handler
+    myEvent1 -= newHandler(&plm0);
+    // Raise the event
+    myEvent1();
+
+    cout << endl;
+
     // Declare the event
     Event<int> myEvent2;
     // Register handlers
@@ -57,6 +66,8 @@ int main()
     myEvent2 += newHandler(a, &A::plm1);
     // Raise the event
     myEvent2(7);
+
+    cout << endl;
 
     // Declare the event
     Event<int, int> myEvent3;

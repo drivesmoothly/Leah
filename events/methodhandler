@@ -46,10 +46,10 @@ public: // From base Handler<Args...>
         Handler<Args...>::Call(args...);
     }
 
-    /// Accepts visitors
+    /// Accept visitors
     void Accept(HandlerVisitor& visitor)
     {
-        visitor.Visit(*this);
+        visitor.Visit((MethodHandlerBase&)*this);
     }
 
 public: // From MethodHandlerBase

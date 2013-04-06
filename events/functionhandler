@@ -41,10 +41,15 @@ public: // From Handler<Args...>
         (*_function)(args...);
         Handler<Args...>::Call(args...);
     }
+    /// Accept visitors
+    void Accept(HandlerVisitor& visitor)
+    {
+        visitor.Visit((FunctionHandlerBase&)*this);
+    }
 
 public: // From FunctionHandlerBase
     /// Retrieves a pointer to the handling function
-    FunctionHandlerBase::FunctionPtr GetFunctionPtr()
+    typename FunctionHandlerBase::FunctionPtr GetFunctionPtr()
     {
         return (FunctionHandlerBase::FunctionPtr)_function;
     }
